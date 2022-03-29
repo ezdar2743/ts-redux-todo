@@ -1,7 +1,9 @@
 import { RootState } from "./store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface IToDo {
+const userGetTodo = localStorage.getItem("ToDo");
+const parseTodo = JSON.parse(userGetTodo as string);
+export interface IToDo {
   text: string;
   id: number;
   category: "TODO" | "DOING" | "DONE";
@@ -11,8 +13,9 @@ interface ISlice {
   todos: IToDo[];
 }
 const initialState: ISlice = {
-  todos: [],
+  todos: userGetTodo ? parseTodo : [],
 };
+
 export const toDoSlice = createSlice({
   name: "toDo",
   initialState,

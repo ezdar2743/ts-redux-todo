@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useAppDispatch } from "../redux/hook";
-import { deleteToDo } from "../redux/toDoReducer";
+import { deleteToDo, IToDo } from "../redux/toDoReducer";
 
 const Container = styled.div`
   margin-top: 40px;
@@ -24,17 +24,13 @@ const DeleteBtn = styled.button`
   }
 `;
 
-interface IpropsType {
-  text: string;
-  id: number;
-}
-
-const ToDoList = ({ text, id }: IpropsType) => {
+const ToDoList = ({ text, id }: IToDo) => {
   const dispatch = useAppDispatch();
   return (
     <>
       <Container>
         <Title>{text}</Title>
+
         <DeleteBtn onClick={() => dispatch(deleteToDo(id))}>delete</DeleteBtn>
       </Container>
     </>

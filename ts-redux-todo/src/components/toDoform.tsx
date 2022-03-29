@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
@@ -50,8 +51,10 @@ const ToDoForm = () => {
   const { register, handleSubmit, setValue } = useForm<IForm>();
   const todos = useAppSelector((state) => state.toDo.todos);
   const dispatch = useAppDispatch();
+  localStorage.setItem("ToDo", JSON.stringify(todos));
   const handleValid = (data: IForm) => {
     dispatch(addToDo(data.ToDo));
+
     setValue("ToDo", "");
   };
 
@@ -68,7 +71,7 @@ const ToDoForm = () => {
         </Form>
         <ToDoUl>
           {todos.map((data) => (
-            <ToDoList text={data.text} key={data.id} id={data.id} />
+            <ToDoList {...data} key={data.id} />
           ))}
         </ToDoUl>
       </Wrpper>
