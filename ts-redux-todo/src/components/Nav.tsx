@@ -1,12 +1,17 @@
-import { motion } from "framer-motion";
+import { motion, useAnimation, useViewportScroll } from "framer-motion";
+import { useEffect } from "react";
 import { Link, useMatch } from "react-router-dom";
 import styled from "styled-components";
 
-const Container = styled.div`
+const Navbar = styled(motion.div)`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 60px;
 `;
+const Container = styled.div``;
 const Logo = styled(motion.svg)``;
 const NavItems = styled.ul`
   display: flex;
@@ -36,8 +41,23 @@ const Nav = () => {
   const toDoMatch = useMatch("/");
   const userMatch = useMatch("/user");
   const shoppingMatch = useMatch("/shopping");
+  const { scrollY } = useViewportScroll();
+  const scrollAnimation = useAnimation();
+  useEffect(() => {
+    scrollY.onChange(() => {
+      if (scrollY.get() >= 65) {
+        scrollAnimation.start({
+          backgroundColor: "rgba(0,0,0,1)",
+        });
+      } else {
+        scrollAnimation.start({
+          backgroundColor: "rgba(0,0,0,0)",
+        });
+      }
+    });
+  });
   return (
-    <Container>
+    <Navbar animate={scrollAnimation}>
       <Link to="/">
         <Logo
           xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +94,7 @@ const Nav = () => {
         </Item>
       </NavItems>
       <ModeBtn />
-    </Container>
+    </Navbar>
   );
 };
 
