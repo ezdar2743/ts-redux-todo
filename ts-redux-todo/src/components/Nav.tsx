@@ -2,6 +2,8 @@ import { motion, useAnimation, useViewportScroll } from "framer-motion";
 import { useEffect } from "react";
 import { Link, useMatch } from "react-router-dom";
 import styled from "styled-components";
+import { changeMode } from "../redux/bgModeReducer";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
 
 const Navbar = styled(motion.div)`
   display: flex;
@@ -56,6 +58,13 @@ const Nav = () => {
       }
     });
   });
+
+  const isDark = useAppSelector((state) => state.modeChage);
+  const dispatch = useAppDispatch();
+  const onChangeMode = () => {
+    dispatch(changeMode());
+  };
+  console.log(isDark);
   return (
     <Navbar animate={scrollAnimation}>
       <Link to="/">
@@ -93,7 +102,9 @@ const Nav = () => {
           </Link>
         </Item>
       </NavItems>
-      <ModeBtn />
+      <ModeBtn onClick={onChangeMode}>
+        {isDark ? "Light Mode" : "DarkMode"}
+      </ModeBtn>
     </Navbar>
   );
 };

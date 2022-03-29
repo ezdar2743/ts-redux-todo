@@ -12,7 +12,7 @@ const Wrpper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #2c2c54;
+  background-color: ${(props) => props.theme.wrapBgColor};
   width: 500px;
   height: 800px;
   margin: 100px 30px;

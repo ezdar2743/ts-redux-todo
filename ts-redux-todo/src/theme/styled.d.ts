@@ -5,5 +5,6 @@ declare module "styled-components" {
     offText: string;
     onText: string;
     lineText: string;
+    wrapBgColor: string;
   }
 }
