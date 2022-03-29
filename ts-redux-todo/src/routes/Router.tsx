@@ -1,18 +1,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Doing from "./Pages/Doing";
-import Done from "./Pages/Done";
+import Nav from "../components/Nav";
+import User from "./Pages/User";
+import Shopping from "./Pages/Shopping";
 import Todo from "./Pages/Todo";
 
-const Router = () => {
+const AllRouter = () => {
   return (
     <BrowserRouter>
+      <Nav />
       <Routes>
         <Route path="/" element={<Todo />}></Route>
-        <Route path="/doing" element={<Doing />}></Route>
-        <Route path="/done" element={<Done />}></Route>
+        <Route path="/user" element={<User />}></Route>
+        <Route path="/shopping" element={<Shopping />}></Route>
       </Routes>
     </BrowserRouter>
   );
 };
 
-export default Router;
+export default AllRouter;

@@ -1,5 +1,11 @@
+import AllRouter from "./routes/Router";
+
 const App = () => {
-  return <div>asd</div>;
+  return (
+    <>
+      <AllRouter />
+    </>
+  );
 };
 
 export default App;
