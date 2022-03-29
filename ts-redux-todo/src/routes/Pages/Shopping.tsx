@@ -1,7 +1,7 @@
 import React from "react";
 
-const Done = () => {
+const Shopping = () => {
   return <div></div>;
 };
 
-export default Done;
+export default Shopping;

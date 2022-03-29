@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { addToDo } from "../redux/toDoReducer";
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -33,16 +35,33 @@ const AddBtn = styled.button`
   margin-left: 15px;
   border: none;
 `;
+interface IForm {
+  ToDo: string;
+}
+interface IToDo {
+  text: string;
+  id: number;
+  category: "TODO" | "DOING" | "DONE";
+}
 
 const ToDoForm = () => {
-  const { register, handleSubmit, setValue } = useForm();
-
+  const { register, handleSubmit, setValue } = useForm<IForm>();
+  const todos = useAppSelector((state) => state.toDo.todos);
+  const dispatch = useAppDispatch();
+  const handleValid = (data: IForm) => {
+    dispatch(addToDo(data.ToDo));
+    setValue("ToDo", "");
+  };
+  console.log(todos);
   return (
     <Container>
       <Wrpper>
         <Title>ToDoList</Title>
-        <Form>
-          <Input />
+        <Form onSubmit={handleSubmit(handleValid)}>
+          <Input
+            placeholder="Write your To do"
+            {...register("ToDo", { required: true, minLength: 1 })}
+          />
           <AddBtn>add</AddBtn>
         </Form>
       </Wrpper>
