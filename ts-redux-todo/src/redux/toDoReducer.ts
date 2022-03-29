@@ -24,8 +24,11 @@ export const toDoSlice = createSlice({
         category: "TODO",
       });
     },
+    deleteToDo: (state, action: PayloadAction<number>) => {
+      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+    },
   },
 });
 export const selectToDo = (state: RootState) => state.toDo.todos;
 export default toDoSlice.reducer;
-export const { addToDo } = toDoSlice.actions;
+export const { addToDo, deleteToDo } = toDoSlice.actions;

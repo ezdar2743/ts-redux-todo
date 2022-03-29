@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { addToDo } from "../redux/toDoReducer";
+import ToDoList from "./toDoList";
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -35,6 +36,7 @@ const AddBtn = styled.button`
   margin-left: 15px;
   border: none;
 `;
+const ToDoUl = styled.ul``;
 interface IForm {
   ToDo: string;
 }
@@ -52,7 +54,7 @@ const ToDoForm = () => {
     dispatch(addToDo(data.ToDo));
     setValue("ToDo", "");
   };
-  console.log(todos);
+
   return (
     <Container>
       <Wrpper>
@@ -64,6 +66,11 @@ const ToDoForm = () => {
           />
           <AddBtn>add</AddBtn>
         </Form>
+        <ToDoUl>
+          {todos.map((data) => (
+            <ToDoList text={data.text} key={data.id} id={data.id} />
+          ))}
+        </ToDoUl>
       </Wrpper>
     </Container>
   );
