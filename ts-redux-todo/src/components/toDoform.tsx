@@ -41,11 +41,6 @@ const ToDoUl = styled.ul``;
 interface IForm {
   ToDo: string;
 }
-interface IToDo {
-  text: string;
-  id: number;
-  category: "TODO" | "DOING" | "DONE";
-}
 
 const ToDoForm = () => {
   const { register, handleSubmit, setValue } = useForm<IForm>();

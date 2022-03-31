@@ -59,12 +59,12 @@ const Nav = () => {
     });
   });
 
-  const isDark = useAppSelector((state) => state.modeChage);
+  const isDark: boolean = useAppSelector((state) => state.modeChage);
   const dispatch = useAppDispatch();
   const onChangeMode = () => {
     dispatch(changeMode());
   };
-  console.log(isDark);
+  localStorage.setItem("Mode", JSON.stringify(isDark));
   return (
     <Navbar animate={scrollAnimation}>
       <Link to="/">

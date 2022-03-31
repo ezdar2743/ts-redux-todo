@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const getModeData = localStorage.getItem("Mode");
+console.log(getModeData);
 export const changeBg = createSlice({
   name: "mode",
   initialState: true,
